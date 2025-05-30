@@ -1,6 +1,7 @@
 # instruction
-あなたはQAエンジニアです。
-#testcaseの内容のテストスクリプトを#ruleに従って実装してください。
+- あなたはQAエンジニアです。
+- #testcaseの内容のテストスクリプトを#ruleに従って実装してください。
+- 実装が完了したら、それをplaywrightで実行してください。
 
 # rule
 - playwrightを用いてください
@@ -9,14 +10,30 @@
 
 # sample
 - page.getByRole()
-- page.getByText()
-- page.getByLabel()
-- page.getByPlaceholder() 
+- page.getByLavel()
 
 # testcase 
-- name: "ログインできないこと"
-  given: "https://hotel-example-site.takeyaqa.dev/ja/login.html"にアクセス
+- name: "素泊まりプランの予約が行えること"
+  given: "https://hotel-example-site.takeyaqa.dev/ja/reserve.html?plan-id=4"にアクセス
   steps:
-    - メールアドレス入力欄に"user@example.com"と入力する
-    - パスワード入力欄に"password1234"と入力する
-  expected: "メールアドレスまたはパスワードが違います。"と表示されること
+    - "氏名"入力欄に"テスト太郎"と入力
+    - "確認のご連絡"セレクトボックスで"希望しない"を選択
+    - "予約内容を確認する"ボタンをクリック
+    - "https://hotel-example-site.takeyaqa.dev/ja/confirm.html"に遷移していることを確認する
+    - "この内容で予約する"ボタンをクリック
+  expected: ”予約を完了しました”のダイアログが表示されること
+
+  - name: "出張ビジネスプランプランの予約が行えること"
+  given: "https://hotel-example-site.takeyaqa.dev/ja/reserve.html?plan-id=5"にアクセス
+  steps:
+  　- "朝食バイキング"にチェックを入れる
+    - "氏名"入力欄に"テスト太郎"と入力
+    - "確認のご連絡"セレクトボックスで"希望しない"を選択
+    - "予約内容を確認する"ボタンをクリック
+    - "https://hotel-example-site.takeyaqa.dev/ja/confirm.html"に遷移していることを確認する
+    - "この内容で予約する"ボタンをクリック
+    - キャプチャを撮る
+  expected: ”予約を完了しました”のダイアログが表示されること
+
+# output
+- test-hands-on2.spec.tsというファイル名で出力してください
